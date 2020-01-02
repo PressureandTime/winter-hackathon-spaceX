@@ -14,13 +14,13 @@ function App (){
 						</NavLink>
 					</li>
 					<li className="li-style">
-						<NavLink to="/deposit" className="App-link">
-							Deposit
+						<NavLink to="/about" className="App-link">
+							About
 						</NavLink>
 					</li>
 					<li className="li-style">
-						<NavLink to="/withdraw" className="App-link">
-							Withdraw
+						<NavLink to="/whatever" className="App-link">
+							Whatever
 						</NavLink>
 					</li>
 				</ul>
