@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
-import NavBar from "./pages/NavBar";
-import HomePage from "./pages/HomePage";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { blueGrey, grey, blue } from "@material-ui/core/colors";
+
+import NavBar from "./components/NavBar";
+import HomePage from "./components/HomePage";
 
 const App = () => {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [darkMode, setDarkMode] = useState(setTimeout(prefersDarkMode, 1000));
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: darkMode ? grey[900] : blueGrey[900]
+      },
+      secondary: {
+        main: darkMode ? blue.A100 : blue.A400
+      },
+      background: {
+        default: darkMode ? "#121212" : grey[50]
+      },
+      type: darkMode ? "dark" : "light"
+    }
+  });
+
   return (
-    <div>
-      <NavBar />
+    <ThemeProvider theme={theme}>
+      <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
       <Switch>
         <Route path="/" component={HomePage} />
       </Switch>
-    </div>
+    </ThemeProvider>
   );
 };
 
