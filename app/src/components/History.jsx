@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     width: "40%",
     height: 300,
     margin: "5% auto",
-    fontSize: 24
+    fontSize: 24,
+    overflow: "scroll"
   },
   bullet: {
     display: "inline-block",
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
   },
   imgSizing: {
     width: "100%",
-    margin: "1% auto"
+    height: "100%"
   }
 });
 
@@ -71,7 +72,9 @@ function History() {
     dispatch(fetchHistory(historyState));
     dispatch(fetchOneLaunch(65));
     setTimeout(() => {
-      setHistoryState(historyState + 1);
+      historyState <= 18
+        ? setHistoryState(historyState + 1)
+        : setHistoryState(1);
       imageState <= 4 ? setImageState(imageState + 1) : setImageState(0);
     }, 5000);
   }, [historyState, imageState]);
