@@ -13,7 +13,11 @@ import {
 const initialState = {
   launches: [],
   error: "",
-  launch: {},
+  launch: {
+    links: {
+      flickr_images: []
+    }
+  },
   loading: false
 };
 

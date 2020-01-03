@@ -41,7 +41,6 @@ let pageCount = 0;
 // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES
 
 export const fetchLaunchList = () => dispatch => {
-
   dispatch({
     type: FETCH_LAUNCH_START
   });
@@ -107,7 +106,6 @@ export const fetchNextTen = () => dispatch => {
         type: FETCH_LAUNCH_FAILURE
       });
     });
-
 };
 
 // export const fetchLaunchList = () => dispatch => {
@@ -178,7 +176,6 @@ export const fetchNextTen = () => dispatch => {
 //     });
 // };
 
-
 // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS// ROCKETS
 
 export const fetchRocketsList = () => dispatch => {
@@ -200,150 +197,146 @@ export const fetchRocketsList = () => dispatch => {
         type: FETCH_ROCKETS_FAILURE
       });
     });
-
 };
 
 // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS
 
-
-
 export const fetchPrevTenMissions = () => dispatch => {
-	if (pageCount === 0) {
-		return;
-	}
-	pageCount -= 10;
-	dispatch({
-		type: FETCH_MISSIONS_START
-	});
-	return axios
-		.get(`https://api.spacexdata.com/v3/missions?limit=10&offset=${pageCount}`)
-		.then(res => {
-			console.log(res.data);
-			dispatch({
-				type: FETCH_MISSIONS_SUCCESS,
-				payload: res.data
-			});
-		})
-		.catch(err => {
-			console.log(err);
-			dispatch({
-				type: FETCH_MISSIONS_FAILURE
-			});
-		});
+  if (pageCount === 0) {
+    return;
+  }
+  pageCount -= 10;
+  dispatch({
+    type: FETCH_MISSIONS_START
+  });
+  return axios
+    .get(`https://api.spacexdata.com/v3/missions?limit=10&offset=${pageCount}`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: FETCH_MISSIONS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: FETCH_MISSIONS_FAILURE
+      });
+    });
 };
 
 export const fetchNextTenMissions = () => dispatch => {
-	dispatch({
-		type: FETCH_MISSIONS_START
-	});
-	pageCount += 10;
-	return axios
-		.get(`https://api.spacexdata.com/v3/missions?limit=10&offset=${pageCount}`)
-		.then(res => {
-			console.log(res.data);
-			dispatch({
-				type: FETCH_MISSIONS_SUCCESS,
-				payload: res.data
-			});
-		})
-		.catch(err => {
-			console.log(err);
-			dispatch({
-				type: FETCH_MISSIONS_FAILURE
-			});
-		});
+  dispatch({
+    type: FETCH_MISSIONS_START
+  });
+  pageCount += 10;
+  return axios
+    .get(`https://api.spacexdata.com/v3/missions?limit=10&offset=${pageCount}`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: FETCH_MISSIONS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: FETCH_MISSIONS_FAILURE
+      });
+    });
 };
 
 export const fetchMissionsList = () => dispatch => {
-	dispatch({
-		type: FETCH_MISSIONS_START
-	});
-	return axios
-		.get(`https://api.spacexdata.com/v3/missions?limit=100`)
-		.then(res => {
-			console.log(res.data);
-			dispatch({
-				type: FETCH_MISSIONS_SUCCESS,
-				payload: res.data
-			});
-		})
-		.catch(err => {
-			console.log(err);
-			dispatch({
-				type: FETCH_MISSIONS_FAILURE
-			});
-		});
+  dispatch({
+    type: FETCH_MISSIONS_START
+  });
+  return axios
+    .get(`https://api.spacexdata.com/v3/missions?limit=100`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({
+        type: FETCH_MISSIONS_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({
+        type: FETCH_MISSIONS_FAILURE
+      });
+    });
 };
 
 // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY
 
 export const fetchHistory = id => dispatch => {
-	dispatch({
-		type: FETCH_HISTORY_START
-	});
+  dispatch({
+    type: FETCH_HISTORY_START
+  });
 
-	return axios
-		.get(`https://api.spacexdata.com/v3/history/${id}`)
-		.then(res => {
-			dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
-		})
-		.catch(err => {
-			console.log(err);
-			dispatch({ type: FETCH_HISTORY_FAILURE, payload: err });
-		});
+  return axios
+    .get(`https://api.spacexdata.com/v3/history?limit=10`)
+    .then(res => {
+      dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: FETCH_HISTORY_FAILURE, payload: err });
+    });
 };
 
 export const fetchOneLaunch = flight_number => dispatch => {
-	dispatch({
-		type: FETCH_ONE_LAUNCH_START
-	});
+  dispatch({
+    type: FETCH_ONE_LAUNCH_START
+  });
 
-	return axios
-		.get(`https://api.spacexdata.com/v3/launches/${flight_number}`)
-		.then(res => {
-			dispatch({ type: FETCH_ONE_LAUNCH_SUCCESS, payload: res.data });
-		})
-		.catch(err => {
-			console.log(err);
-			dispatch({ type: FETCH_ONE_LAUNCH_FAILURE, payload: err });
-		});
+  return axios
+    .get(`https://api.spacexdata.com/v3/launches/${flight_number}`)
+    .then(res => {
+      dispatch({ type: FETCH_ONE_LAUNCH_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: FETCH_ONE_LAUNCH_FAILURE, payload: err });
+    });
 };
 
 export const search = (searchType, searchValue) => dispatch => {
-	const initial = searchType.charAt(0).toUpperCase();
-	const start = `FETCH_SEARCH_START_${initial}`;
-	const success = `FETCH_SEARCH_SUCCESS_${initial}`;
-	const failure = `FETCH_SEARCH_FAILURE_${initial}`;
+  const initial = searchType.charAt(0).toUpperCase();
+  const start = `FETCH_SEARCH_START_${initial}`;
+  const success = `FETCH_SEARCH_SUCCESS_${initial}`;
+  const failure = `FETCH_SEARCH_FAILURE_${initial}`;
 
-	dispatch({
-		type: start
-	});
+  dispatch({
+    type: start
+  });
 
-	return axios
-		.get(`https://api.spacexdata.com/v3/${searchType}`)
-		.then(res => {
-			const value = searchValue.toLowerCase();
-			let searchResults;
-			if (initial === "M" || initial === "L") {
-				searchResults = res.data.filter(obj => {
-					const missionName = obj.mission_name.toLowerCase();
-					return missionName.includes(value);
-				});
-			} else if (initial === "R") {
-				searchResults = res.data.filter(obj => {
-					const rocketName = obj.rocket_name.toLowerCase();
-					return rocketName.includes(value);
-				});
-			}
+  return axios
+    .get(`https://api.spacexdata.com/v3/${searchType}`)
+    .then(res => {
+      const value = searchValue.toLowerCase();
+      let searchResults;
+      if (initial === "M" || initial === "L") {
+        searchResults = res.data.filter(obj => {
+          const missionName = obj.mission_name.toLowerCase();
+          return missionName.includes(value);
+        });
+      } else if (initial === "R") {
+        searchResults = res.data.filter(obj => {
+          const rocketName = obj.rocket_name.toLowerCase();
+          return rocketName.includes(value);
+        });
+      }
 
-			if (!searchValue) {
-				dispatch({ type: success, payload: [] });
-			} else {
-				dispatch({ type: success, payload: searchResults });
-			}
-		})
-		.catch(err => {
-			dispatch({ type: failure, payload: err });
-		});
+      if (!searchValue) {
+        dispatch({ type: success, payload: [] });
+      } else {
+        dispatch({ type: success, payload: searchResults });
+      }
+    })
+    .catch(err => {
+      dispatch({ type: failure, payload: err });
+    });
 };
-

@@ -82,8 +82,10 @@ function History() {
   const classes = useStyles();
 
   const picsArr = useSelector(state => {
-    return state.launchesReducer.launch.links;
+    return state.launchesReducer.launch;
   });
+
+  console.log(picsArr);
 
   const { launchesLoading } = useSelector(state => ({
     launchesLoading: state.launchesReducer.loading
@@ -93,13 +95,16 @@ function History() {
     dispatch(fetchHistory());
     dispatch(fetchOneLaunch(65));
   }, []);
-
+  if (Object.entries(picsArr).length === 0) {
+    return <h1>Loading</h1>;
+  }
   return (
+    // <h1>Why</h1>
     <div className={classes.layout}>
-      {picsArr && picsArr.flickr_images.length > 0 && (
+      {picsArr.links.flickr_images.length > 0 && (
         <div className={classes.cardContainer}>
           <Carousel>
-            {picsArr.flickr_images.map((img, index) => (
+            {picsArr.links.flickr_images.map((img, index) => (
               <img
                 key={index}
                 src={img}
@@ -110,10 +115,10 @@ function History() {
           </Carousel>
         </div>
       )}
-      {picsArr && picsArr.flickr_images.length > 0 && (
+      {history.length && (
         <div className={classes.cardContainer}>
           <Carousel>
-            {history &&
+            {history.length !== 0 &&
               history.map((el, index) => {
                 return (
                   <Card className={classes.card} variant="outlined" key={index}>
