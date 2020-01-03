@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
+import {LaunchListContainer} from './LaunchListStyles'
 
 import { fetchLaunchList, fetchNextTen, fetchPrevTen } from "../store/action";
 
@@ -18,13 +19,13 @@ function LaunchList() {
 
   return (
     <>
-      <div style={{ marginTop: "50px" }}>
+      <LaunchListContainer>
         {launches.map(launch => (
           <Launch key={launch.flight_number} launch={launch} />
         ))}
         <Button onClick={() => dispatch(fetchPrevTen())}>Previous 10</Button>
         <Button onClick={() => dispatch(fetchNextTen())}>Next 10</Button>
-      </div>
+      </LaunchListContainer>
     </>
   );
 }

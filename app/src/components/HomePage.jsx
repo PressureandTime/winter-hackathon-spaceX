@@ -1,10 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import logo from '../logo.png'
 
 function HomePage() {
 	return (
 		<div>
-			<h1>HomePage</h1>
+			<img src={logo} alt="SpaceX" style={{width:400, display:'block', margin:'auto'}}/>
 		</div>
 	);
 }
