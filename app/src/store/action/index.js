@@ -203,13 +203,13 @@ export const fetchRocketsList = () => dispatch => {
 
 // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY
 
-export const fetchHistory = id => dispatch => {
+export const fetchHistory = () => dispatch => {
   dispatch({
     type: FETCH_HISTORY_START
   });
 
   return axios
-    .get(`https://api.spacexdata.com/v3/history/${id}`)
+    .get(`https://api.spacexdata.com/v3/history?limit=15`)
     .then(res => {
       dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
     })
