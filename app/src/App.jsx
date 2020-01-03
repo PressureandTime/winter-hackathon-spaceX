@@ -8,6 +8,7 @@ import { blueGrey, grey, blue } from "@material-ui/core/colors";
 import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import LaunchList from "./components/LaunchList";
+import LaunchCard from "./components/LaunchCard.jsx";
 
 const App = () => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -34,6 +35,7 @@ const App = () => {
       <Switch>
         <Route path="/launches" component={LaunchList} />
         <Route exact path="/" component={HomePage} />
+        <Route path="/launch/:id" component={LaunchCard} />
       </Switch>
     </ThemeProvider>
   );

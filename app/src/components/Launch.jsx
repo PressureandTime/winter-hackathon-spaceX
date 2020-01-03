@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -6,7 +8,8 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-const useStyles = makeStyles(theme => ({
+
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%"
   },
@@ -16,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Launch({ launch }) {
+function Launch({ launch, history }) {
   const classes = useStyles();
 
   const {
@@ -24,7 +27,8 @@ function Launch({ launch }) {
     launch_year,
     launch_date_utc,
     launch_success,
-    details
+    details,
+    flight_number
   } = launch;
   return (
     <div className={classes.root}>
@@ -43,7 +47,9 @@ function Launch({ launch }) {
               <p>Mission: {launch_success ? `Success` : `Failure`}</p>
               <p>{details}</p>
             </div>
-            <Button>Details</Button>
+            <Button onClick={() => history.push(`/launch/${flight_number}`)}>
+              Details
+            </Button>
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -51,4 +57,4 @@ function Launch({ launch }) {
   );
 }
 
-export default Launch;
+export default withRouter(Launch);
