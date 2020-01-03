@@ -22,6 +22,11 @@ export const FETCH_MISSIONS_SUCCESS = "FETCH_MISSIONS_SUCCESS";
 export const FETCH_MISSIONS_START = "FETCH_MISSIONS_START";
 export const FETCH_MISSIONS_FAILURE = "FETCH_MISSIONS_FAILURE";
 
+
+export const FETCH_HISTORY_START = "FETCH_HISTORY_START";
+export const FETCH_HISTORY_SUCCESS = "FETCH_HISTORY_SUCCESS";
+export const FETCH_HISTORY_FAILURE = "FETCH_HISTORY_FAILURE";
+
 export const FETCH_SEARCH_SUCCESS_L = "FETCH_SEARCH_SUCCESS_L";
 export const FETCH_SEARCH_START_L = "FETCH_SEARCH_START_L";
 export const FETCH_SEARCH_FAILURE_L = "FETCH_SEARCH_FAILURE_L";
@@ -31,6 +36,7 @@ export const FETCH_SEARCH_FAILURE_M = "FETCH_SEARCH_FAILURE_M";
 export const FETCH_SEARCH_SUCCESS_R = "FETCH_SEARCH_SUCCESS_R";
 export const FETCH_SEARCH_START_R = "FETCH_SEARCH_START_R";
 export const FETCH_SEARCH_FAILURE_R = "FETCH_SEARCH_FAILURE_R";
+
 
 let pageCount = 0;
 
@@ -102,6 +108,7 @@ export const fetchNextTen = () => (dispatch) => {
 				type: FETCH_LAUNCH_FAILURE
 			});
 		});
+
 };
 
 // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS// ROCKETS
@@ -125,9 +132,31 @@ export const fetchRocketsList = () => (dispatch) => {
 				type: FETCH_ROCKETS_FAILURE
 			});
 		});
+
 };
 
 // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS
+
+
+
+
+// HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY
+
+export const fetchHistory = id => dispatch => {
+  dispatch({
+    type: FETCH_HISTORY_START
+  });
+
+  return axios
+    .get(`https://api.spacexdata.com/v3/history/${id}`)
+    .then(res => {
+      dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: FETCH_HISTORY_FAILURE, payload: err });
+    });
+};
 
 export const fetchMissionsList = () => (dispatch) => {
 	dispatch({
@@ -204,3 +233,4 @@ export const search = (searchType, searchValue) => (dispatch) => {
 			dispatch({ type: failure, payload: err });
 		});
 };
+
