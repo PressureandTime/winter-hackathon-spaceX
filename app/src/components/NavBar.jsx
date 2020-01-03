@@ -25,7 +25,7 @@ const NavBar = ({ darkMode, setDarkMode }) => {
         <Toolbar>
           <Link color="inherit" to="/" component={NavLink}>
             <Typography variant="h6" component="h1">
-              SpaceX Launches Thing
+              SpaceFlex
             </Typography>
           </Link>
 

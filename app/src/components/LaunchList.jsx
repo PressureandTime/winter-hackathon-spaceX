@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { fetchLaunchList, fetchNextTen, fetchPrevTen } from '../store/action';
 
 import Launch from './Launch';
+import Search from './Search';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +31,9 @@ function LaunchList() {
   const launches = useSelector(state => {
     return state.launchesReducer.launches;
   });
+  const searchedLaunches = useSelector(state => {
+    return state.launchesReducer.searchedLaunches;
+  });
 
   const classes = useStyles();
 
@@ -39,25 +43,31 @@ function LaunchList() {
 
   return (
     <>
-      <LaunchContainer>
-        <h2>Launches</h2>
+      <Search searchType="launches" />
+      <h2 style={{ textAlign: 'center' }}>Launches</h2>
+      {searchedLaunches && searchedLaunches.length > 0 ? (
         <div className={classes.root}>
-          {launches.map(launch => (
+          {searchedLaunches.map(launch => (
             <Launch key={launch.flight_number} launch={launch} />
           ))}
         </div>
-        <Button onClick={() => dispatch(fetchPrevTen())}>Previous</Button>
-        <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
-      </LaunchContainer>
+      ) : (
+        <LaunchContainer>
+          <div className={classes.root}>
+            {launches.map(launch => (
+              <Launch key={launch.flight_number} launch={launch} />
+            ))}
+          </div>
+          <Button onClick={() => dispatch(fetchPrevTen())}>Previous</Button>
+          <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
+        </LaunchContainer>
+      )}
     </>
   );
 }
 
 const LaunchContainer = styled.div`
   margin: 50px 100px;
-  h2 {
-    text-align: center;
-  }
 `;
 
 export default LaunchList;
