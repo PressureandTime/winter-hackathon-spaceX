@@ -44,6 +44,9 @@ const useStyles = makeStyles({
 });
 
 function History() {
+  const [historyState, setHistoryState] = useState(1);
+
+  const [imageState, setImageState] = useState(1);
   const dispatch = useDispatch();
   const history = useSelector(state => state.historyReducer.history);
 
@@ -65,9 +68,13 @@ function History() {
   picsArr && console.log(`Launches: `, picsArr.flickr_images);
 
   useEffect(() => {
-    dispatch(fetchHistory(1));
+    dispatch(fetchHistory(historyState));
     dispatch(fetchOneLaunch(65));
-  }, []);
+    setTimeout(() => {
+      setHistoryState(historyState + 1);
+      imageState <= 4 ? setImageState(imageState + 1) : setImageState(0);
+    }, 5000);
+  }, [historyState, imageState]);
 
   console.log(`History: `, history);
   return (
@@ -105,12 +112,15 @@ function History() {
         </CardActions> */}
       </Card>
       <Card className={classes.card} variant="outlined">
-        {picsArr &&
-          picsArr.flickr_images.map(pic => (
-            <div>
-              <img className={classes.imgSizing} src={pic} alt="flickr" />
-            </div>
-          ))}
+        {picsArr && (
+          <div>
+            <img
+              className={classes.imgSizing}
+              src={picsArr.flickr_images[imageState]}
+              alt="flickr"
+            />
+          </div>
+        )}
       </Card>
     </div>
   );
