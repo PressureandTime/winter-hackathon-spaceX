@@ -1,15 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import {
-  fetchLaunchList,
-  fetchNextTen,
-  fetchPrevTen
-} from "../../store/action";
+import { fetchLaunchList } from "../../store/action";
 
 import Launch from "../Launch";
 import Search from "../Search";
@@ -77,12 +72,6 @@ function LaunchList() {
             <Loading />
           ) : (
             <LaunchContainer>
-              {/* <div className={classes.buttonContainer}>
-                <Button onClick={() => dispatch(fetchPrevTen())}>
-                  Previous
-                </Button>
-                <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
-              </div> */}
               <div className={classes.root}>
                 {launches.map(
                   (launch, index) =>
@@ -91,12 +80,6 @@ function LaunchList() {
                     )
                 )}
               </div>
-              {/* <div className={classes.buttonContainer}>
-                <Button onClick={() => dispatch(fetchPrevTen())}>
-                  Previous
-                </Button>
-                <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
-              </div> */}
             </LaunchContainer>
           )}
         </>

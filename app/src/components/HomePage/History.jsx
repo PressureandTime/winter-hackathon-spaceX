@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchHistory, fetchOneLaunch } from "../../store/action";
-import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Carousel from "react-material-ui-carousel";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 import Loading from "../Loading";
 
@@ -33,8 +28,6 @@ const useStyles = makeStyles({
     minWidth: "450px",
     maxWidth: "450px",
     height: 275,
-    // margin: "0 auto",
-    // marginTop: "10%",
     fontSize: 18,
     overflow: "hidden",
     display: "flex",
@@ -77,15 +70,6 @@ const useStyles = makeStyles({
     minWidth: "100%",
     minHeight: "100%",
     maxHeight: "100%"
-  },
-  iconBack: {
-    marginTop: "230px",
-    marginRight: "-5%"
-  },
-  iconForward: {
-    marginTop: "230px",
-    marginLeft: "-4.5%",
-    marginRight: "5%"
   },
   details: {
     overflow: "auto",
