@@ -22,24 +22,28 @@ export const FETCH_MISSIONS_SUCCESS = "FETCH_MISSIONS_SUCCESS";
 export const FETCH_MISSIONS_START = "FETCH_MISSIONS_START";
 export const FETCH_MISSIONS_FAILURE = "FETCH_MISSIONS_FAILURE";
 
+export const FETCH_HISTORY_START = "FETCH_HISTORY_START";
+export const FETCH_HISTORY_SUCCESS = "FETCH_HISTORY_SUCCESS";
+export const FETCH_HISTORY_FAILURE = "FETCH_HISTORY_FAILURE";
+
 let pageCount = 0;
 
 // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES
 
-export const fetchLaunchList = () => (dispatch) => {
+export const fetchLaunchList = () => dispatch => {
   dispatch({
     type: FETCH_LAUNCH_START
   });
   return axios
     .get(`https://api.spacexdata.com/v3/launches?limit=10`)
-    .then((res) => {
+    .then(res => {
       console.log(res.data);
       dispatch({
         type: FETCH_LAUNCH_SUCCESS,
         payload: res.data
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       dispatch({
         type: FETCH_LAUNCH_FAILURE
@@ -47,7 +51,7 @@ export const fetchLaunchList = () => (dispatch) => {
     });
 };
 
-export const fetchPrevTen = () => (dispatch) => {
+export const fetchPrevTen = () => dispatch => {
   if (pageCount === 0) {
     return;
   }
@@ -57,14 +61,14 @@ export const fetchPrevTen = () => (dispatch) => {
   });
   return axios
     .get(`https://api.spacexdata.com/v3/launches?limit=10&offset=${pageCount}`)
-    .then((res) => {
+    .then(res => {
       console.log(res.data);
       dispatch({
         type: FETCH_LAUNCH_SUCCESS,
         payload: res.data
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       dispatch({
         type: FETCH_LAUNCH_FAILURE
@@ -72,21 +76,21 @@ export const fetchPrevTen = () => (dispatch) => {
     });
 };
 
-export const fetchNextTen = () => (dispatch) => {
+export const fetchNextTen = () => dispatch => {
   dispatch({
     type: FETCH_LAUNCH_START
   });
   pageCount += 10;
   return axios
     .get(`https://api.spacexdata.com/v3/launches?limit=10&offset=${pageCount}`)
-    .then((res) => {
+    .then(res => {
       console.log(res.data);
       dispatch({
         type: FETCH_LAUNCH_SUCCESS,
         payload: res.data
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       dispatch({
         type: FETCH_LAUNCH_FAILURE
@@ -96,20 +100,20 @@ export const fetchNextTen = () => (dispatch) => {
 
 // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS// ROCKETS
 
-export const fetchRocketsList = () => (dispatch) => {
+export const fetchRocketsList = () => dispatch => {
   dispatch({
     type: FETCH_ROCKETS_START
   });
   return axios
     .get(`https://api.spacexdata.com/v3/rockets?limit=10`)
-    .then((res) => {
+    .then(res => {
       console.log(res.data);
       dispatch({
         type: FETCH_ROCKETS_SUCCESS,
         payload: res.data
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       dispatch({
         type: FETCH_ROCKETS_FAILURE
@@ -119,20 +123,20 @@ export const fetchRocketsList = () => (dispatch) => {
 
 // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS
 
-export const fetchMissionsList = () => (dispatch) => {
+export const fetchMissionsList = () => dispatch => {
   dispatch({
     type: FETCH_MISSIONS_START
   });
   return axios
     .get(`https://api.spacexdata.com/v3/missions?limit=10`)
-    .then((res) => {
+    .then(res => {
       console.log(res.data);
       dispatch({
         type: FETCH_MISSIONS_SUCCESS,
         payload: res.data
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       dispatch({
         type: FETCH_MISSIONS_FAILURE
@@ -140,19 +144,37 @@ export const fetchMissionsList = () => (dispatch) => {
     });
 };
 
-export const fetchOneLaunch = (flight_number) => (dispatch) => {
+export const fetchOneLaunch = flight_number => dispatch => {
   dispatch({
     type: FETCH_ONE_LAUNCH_START
   });
 
   return axios
     .get(`https://api.spacexdata.com/v3/launches/${flight_number}`)
-    .then((res) => {
+    .then(res => {
       console.log(res, "tomato");
       dispatch({ type: FETCH_ONE_LAUNCH_SUCCESS, payload: res.data });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       dispatch({ type: FETCH_ONE_LAUNCH_FAILURE, payload: err });
+    });
+};
+
+// HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY
+
+export const fetchHistory = () => dispatch => {
+  dispatch({
+    type: FETCH_HISTORY_START
+  });
+
+  return axios
+    .get(`https://api.spacexdata.com/v3/history`)
+    .then(res => {
+      dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: FETCH_HISTORY_FAILURE, payload: err });
     });
 };
