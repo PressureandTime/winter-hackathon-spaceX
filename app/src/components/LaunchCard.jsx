@@ -16,8 +16,7 @@ const LaunchCard = ({ match }) => {
     links,
     mission_name,
     rocket,
-    ships,
-    upcoming
+    ships
   } = launch;
 
   console.log(launch);
@@ -42,6 +41,7 @@ const LaunchCard = ({ match }) => {
         ))}
 
       {mission_name && <h1>{mission_name}</h1>}
+
       {launch_date_utc && (
         <h2>{launch_date_utc.replace("T", " | ").replace("Z", "")}</h2>
       )}
@@ -61,6 +61,9 @@ const LaunchCard = ({ match }) => {
           <p>Rocket Type: {rocket.rocket_type} </p>
         </>
       )}
+
+      {ships && <h3>SHIPS: </h3>}
+      {ships && ships.map((item, index) => <p key={index}>{item}</p>)}
 
       {details && <p>Fun Fact: {details}.</p>}
 
