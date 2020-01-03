@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   buttonContainer: {
     display: "flex",
     justifyContent: "center"
+  },
+  searchBar: {
+    paddingLeft: "20%"
   }
 }));
 
