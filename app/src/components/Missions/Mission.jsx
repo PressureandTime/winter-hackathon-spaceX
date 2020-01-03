@@ -16,10 +16,16 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-function Rocket({ rocket }) {
+function Mission({ mission }) {
 	const classes = useStyles();
 
-	const { rocket_name, stages, first_flight, country, description } = rocket;
+	const {
+		mission_name,
+		manufacturers,
+		website,
+		twitter,
+		description
+	} = mission;
 	return (
 		<div className={classes.root}>
 			<ExpansionPanel>
@@ -28,15 +34,31 @@ function Rocket({ rocket }) {
 					aria-controls="panel1a-content"
 					id="panel1a-header"
 				>
-					<Typography className={classes.heading}>{rocket_name}</Typography>
+					<Typography className={classes.heading}>{mission_name}</Typography>
 				</ExpansionPanelSummary>
 				<ExpansionPanelDetails>
 					<div>
 						<div>
-							<p>Date of first flight:{first_flight}</p>
-							<p>Stages:{stages}</p>
-							<p>Country:{country}</p>
+							<p>Manufacturer: {manufacturers}</p>
 							<p>{description}</p>
+							<p>
+								Visit the manufacurer's website{" "}
+								<a href={website} target="_ ">
+									here.
+								</a>
+							</p>
+							<p>
+								Follow
+								<a href={twitter} target="_ ">
+									{" "}
+									{manufacturers}
+								</a>{" "}
+								on Twitter
+								<a href={twitter} target="_ ">
+									{" "}
+									HERE
+								</a>
+							</p>
 						</div>
 						<Button>Details</Button>
 					</div>
@@ -46,4 +68,4 @@ function Rocket({ rocket }) {
 	);
 }
 
-export default Rocket;
+export default Mission;

@@ -9,7 +9,7 @@ import NavBar from "./components/NavBar";
 import HomePage from "./components/HomePage";
 import LaunchList from "./components/LaunchList";
 import RocketList from "./components/Rockets/RocketList";
-
+import MissionList from "./components/Missions/MissionList";
 const App = () => {
 	const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 	const [darkMode, setDarkMode] = useState(setTimeout(prefersDarkMode, 1000));
@@ -33,8 +33,9 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
 			<Switch>
-				<Route path="/rockets" component={RocketList} />
+				<Route path="/missions" component={MissionList} />
 
+				<Route path="/rockets" component={RocketList} />
 				<Route path="/launches" component={LaunchList} />
 				<Route exact path="/" component={HomePage} />
 			</Switch>

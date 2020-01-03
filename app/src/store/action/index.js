@@ -14,7 +14,13 @@ export const FETCH_ROCKETS_SUCCESS = "FETCH_ROCKETS_SUCCESS";
 export const FETCH_ROCKETS_START = "FETCH_ROCKETS_START";
 export const FETCH_ROCKETS_FAILURE = "FETCH_ROCKETS_FAILURE";
 
+export const FETCH_MISSIONS_SUCCESS = "FETCH_MISSIONS_SUCCESS";
+export const FETCH_MISSIONS_START = "FETCH_MISSIONS_START";
+export const FETCH_MISSIONS_FAILURE = "FETCH_MISSIONS_FAILURE";
+
 let pageCount = 0;
+
+// LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES // LAUNCHES
 
 export const fetchLaunchList = () => dispatch => {
 	dispatch({
@@ -84,7 +90,7 @@ export const fetchNextTen = () => dispatch => {
 		});
 };
 
-// ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS
+// ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS // ROCKETS// ROCKETS
 
 export const fetchRocketsList = () => dispatch => {
 	dispatch({
@@ -107,49 +113,25 @@ export const fetchRocketsList = () => dispatch => {
 		});
 };
 
-export const fetchNextTenRockets = () => dispatch => {
-	dispatch({
-		type: FETCH_ROCKETS_START
-	});
-	pageCount += 10;
-	return axios
-		.get(`https://api.spacexdata.com/v3/rockets?limit=10&offset=${pageCount}`)
-		.then(res => {
-			console.log(res.data);
-			dispatch({
-				type: FETCH_ROCKETS_SUCCESS,
-				payload: res.data
-			});
-		})
-		.catch(err => {
-			console.log(err);
-			dispatch({
-				type: FETCH_ROCKETS_FAILURE
-			});
-		});
-};
+// MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS // MISSIONS
 
-export const fetchPrevTenRockets = () => dispatch => {
-	if (pageCount === 0) {
-		return;
-	}
-	pageCount -= 10;
+export const fetchMissionsList = () => dispatch => {
 	dispatch({
-		type: FETCH_ROCKETS_START
+		type: FETCH_MISSIONS_START
 	});
 	return axios
-		.get(`https://api.spacexdata.com/v3/rockets?limit=10&offset=${pageCount}`)
+		.get(`https://api.spacexdata.com/v3/missions?limit=10`)
 		.then(res => {
 			console.log(res.data);
 			dispatch({
-				type: FETCH_ROCKETS_SUCCESS,
+				type: FETCH_MISSIONS_SUCCESS,
 				payload: res.data
 			});
 		})
 		.catch(err => {
 			console.log(err);
 			dispatch({
-				type: FETCH_ROCKETS_FAILURE
+				type: FETCH_MISSIONS_FAILURE
 			});
 		});
 };
