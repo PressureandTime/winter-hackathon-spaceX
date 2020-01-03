@@ -20,13 +20,13 @@ const App = () => {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: darkMode ? grey[900] : blueGrey[900]
+        main: darkMode ? grey[900] : grey[50]
       },
       secondary: {
         main: darkMode ? blue.A100 : blue.A400
       },
       background: {
-        default: darkMode ? "#121212" : grey[50]
+        default: darkMode ? "#121212" : grey[200]
       },
       type: darkMode ? "dark" : "light"
     }
