@@ -58,7 +58,7 @@ function LaunchList() {
   return (
     <>
       <Search searchType="launches" />
-      <h2 style={{ textAlign: "center" }}>Recent Launches</h2>
+      <h2 style={{ textAlign: "center" }}>Past Launches</h2>
       {searchedLaunches && searchedLaunches.length > 0 ? (
         <>
           {launchesLoading ? (
