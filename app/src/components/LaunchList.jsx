@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import { fetchLaunchList, fetchNextTen, fetchPrevTen } from "../store/action";
 
 import Launch from "./Launch";
+import Search from "./Search";
 
 function LaunchList() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function LaunchList() {
 
   return (
     <>
+      <Search />
       <div style={{ marginTop: "50px" }}>
         {launches.map(launch => (
           <Launch key={launch.flight_number} launch={launch} />

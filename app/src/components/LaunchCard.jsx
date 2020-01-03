@@ -55,7 +55,12 @@ const LaunchCard = ({ match }) => {
         </h3>
       )}
 
-      {rocket && <p>Rocket:</p>}
+      {rocket && (
+        <>
+          <p>Rocket Name: {rocket.rocket_name}</p>{" "}
+          <p>Rocket Type: {rocket.rocket_type} </p>
+        </>
+      )}
 
       {details && <p>Fun Fact: {details}.</p>}
 

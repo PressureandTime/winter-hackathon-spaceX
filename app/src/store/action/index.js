@@ -135,3 +135,24 @@ export const fetchMissionsList = () => dispatch => {
 			});
 		});
 };
+
+export const FETCH_ONE_LAUNCH_START = "FETCH_ONE_LAUNCH_START";
+export const FETCH_ONE_LAUNCH_SUCCESS = "FETCH_ONE_LAUNCH_SUCCESS";
+export const FETCH_ONE_LAUNCH_FAILURE = "FETCH_ONE_LAUNCH_FAILURE";
+
+export const fetchOneLaunch = (flight_number) => (dispatch) => {
+	dispatch({
+		type: FETCH_ONE_LAUNCH_START
+	});
+
+	return axios
+		.get(`https://api.spacexdata.com/v3/launches/${flight_number}`)
+		.then((res) => {
+			console.log(res, "tomato");
+			dispatch({ type: FETCH_ONE_LAUNCH_SUCCESS, payload: res.data });
+		})
+		.catch((err) => {
+			console.log(err);
+			dispatch({ type: FETCH_ONE_LAUNCH_FAILURE, payload: err });
+		});
+};
