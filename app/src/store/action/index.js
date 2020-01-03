@@ -209,7 +209,7 @@ export const fetchHistory = () => dispatch => {
   });
 
   return axios
-    .get(`https://api.spacexdata.com/v3/history?limit=15`)
+    .get(`https://api.spacexdata.com/v3/history?limit=10`)
     .then(res => {
       dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
     })
