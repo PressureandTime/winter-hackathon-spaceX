@@ -163,13 +163,13 @@ export const fetchOneLaunch = flight_number => dispatch => {
 
 // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY // HISTORY
 
-export const fetchHistory = () => dispatch => {
+export const fetchHistory = id => dispatch => {
   dispatch({
     type: FETCH_HISTORY_START
   });
 
   return axios
-    .get(`https://api.spacexdata.com/v3/history`)
+    .get(`https://api.spacexdata.com/v3/history/${id}`)
     .then(res => {
       dispatch({ type: FETCH_HISTORY_SUCCESS, payload: res.data });
     })

@@ -5,7 +5,7 @@ import {
 } from "../action";
 
 const initialState = {
-  history: [],
+  history: {},
   error: ""
 };
 

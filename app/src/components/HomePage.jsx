@@ -1,20 +1,29 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchHistory } from "../store/action";
+
+import History from "./History";
 
 function HomePage() {
-  const dispatch = useDispatch();
-  const history = useSelector(state => {
-    console.log(state);
-  });
+  //   const dispatch = useDispatch();
+  //   const history = useSelector(state => state.historyReducer.history);
 
-  console.log(history);
-  useEffect(() => {
-    dispatch(fetchHistory());
-  }, []);
+  //   const {
+  //     id,
+  //     title,
+  //     even_date_utc,
+  //     flight_number,
+  //     details,
+  //     links = {}
+  //   } = history;
+  //   const { reddit = {}, article = {}, wikipedia = {} } = links;
+
+  //   history.map(item => console.log(item.title));
+  //   useEffect(() => {
+  //     dispatch(fetchHistory());
+  //   }, []);
+
   return (
     <div>
-      <h1>HomePage</h1>
+      <History />
     </div>
   );
 }
