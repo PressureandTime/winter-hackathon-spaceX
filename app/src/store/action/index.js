@@ -92,7 +92,7 @@ export const fetchOneLaunch = (flight_number) => (dispatch) => {
   return axios
     .get(`https://api.spacexdata.com/v3/launches/${flight_number}`)
     .then((res) => {
-      console.log(res);
+      console.log(res, "tomato");
       dispatch({ type: FETCH_ONE_LAUNCH_SUCCESS, payload: res.data });
     })
     .catch((err) => {
