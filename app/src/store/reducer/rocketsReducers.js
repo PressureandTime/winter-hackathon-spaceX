@@ -1,7 +1,10 @@
 import {
 	FETCH_ROCKETS_SUCCESS,
 	FETCH_ROCKETS_START,
-	FETCH_ROCKETS_FAILURE
+	FETCH_ROCKETS_FAILURE,
+	FETCH_SEARCH_FAILURE_R,
+	FETCH_SEARCH_START_R,
+	FETCH_SEARCH_SUCCESS_R
 } from "../action";
 
 const initialState = {
@@ -23,6 +26,12 @@ const rocketsReducer = (state = initialState, action) => {
 			return {
 				error: action.payload
 			};
+		case FETCH_SEARCH_START_R:
+			return { ...state, loading: true };
+		case FETCH_SEARCH_SUCCESS_R:
+			return { ...state, loading: false, searchedRockets: action.payload };
+		case FETCH_SEARCH_FAILURE_R:
+			return { ...state, loading: false, error: action.payload };
 		default:
 			return state;
 	}
