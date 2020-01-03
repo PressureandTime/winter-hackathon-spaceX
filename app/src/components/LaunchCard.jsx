@@ -32,18 +32,22 @@ const LaunchCard = ({ match }) => {
 
   return (
     <>
-      {links.flickr_images.length === 0 && !links.mission_patch_small && (
-        <img src={spacexPlaceholder} alt={"Rocket Launch with SpaceX Logo"} />
-      )}
+      {links &&
+        links.flickr_images.length === 0 &&
+        !links.mission_patch_small && (
+          <img src={spacexPlaceholder} alt={"Rocket Launch with SpaceX Logo"} />
+        )}
 
-      {links.flickr_images.length === 0 && links.mission_patch_small && (
-        <img
-          src={links.mission_patch_small}
-          alt={"Patch for " + mission_name}
-        />
-      )}
+      {links &&
+        links.flickr_images.length === 0 &&
+        links.mission_patch_small && (
+          <img
+            src={links.mission_patch_small}
+            alt={"Patch for " + mission_name}
+          />
+        )}
 
-      {launch.links.flickr_images.length > 0 && (
+      {links && launch.links.flickr_images.length > 0 && (
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Carousel>
             {launch.links.flickr_images.map((img, index) => (
