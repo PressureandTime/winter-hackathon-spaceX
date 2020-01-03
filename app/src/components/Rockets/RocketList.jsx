@@ -11,14 +11,19 @@ function RocketList() {
 	const rockets = useSelector(state => {
 		return state.rocketsReducer.rockets;
 	});
+	const searchedRockets = useSelector(state => {
+		return state.rocketsReducer.searchedRockets;
+	});
 	useEffect(() => {
 		dispatch(fetchRocketsList());
 	}, []);
 	return (
 		<>
-			<Search />
+			<Search searchType="rockets" />
 			<div style={{ marginTop: "50px" }}>
-				{rockets.map(rocket => (
+				{searchedRockets && searchedRockets.length > 0 ? searchedRockets.map(rocket => (
+					<Rocket key={rocket.rocket_id} rocket={rocket} />
+				)) : rockets.map(rocket => (
 					<Rocket key={rocket.rocket_id} rocket={rocket} />
 				))}
 			</div>

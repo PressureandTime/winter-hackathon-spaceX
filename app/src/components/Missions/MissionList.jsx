@@ -11,16 +11,20 @@ function MissionList() {
 	const missions = useSelector(state => {
 		return state.missionsReducer.missions;
 	});
+	const searchedMissions = useSelector(state => {
+		return state.missionsReducer.searchedMissions;
+	});
 	useEffect(() => {
 		dispatch(fetchMissionsList());
 	}, []);
 	return (
 		<>
-			<Search />
+			<Search searchType="missions" />
 			<div style={{ marginTop: "50px" }}>
-				{missions.map(mission => (
-					<Mission key={mission.mission_id} mission={mission} />
-				))}
+				{searchedMissions && searchedMissions.length > 0 ? searchedMissions.map(mission => (
+					<Mission key={mission.mission_id} mission={mission} />)) : missions.map(mission => (
+						<Mission key={mission.mission_id} mission={mission} />
+					))}
 			</div>
 		</>
 	);
