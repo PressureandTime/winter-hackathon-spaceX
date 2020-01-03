@@ -1,33 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchHistory, fetchOneLaunch } from "../store/action";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchHistory, fetchOneLaunch } from '../store/action';
+import { Link } from 'react-router-dom';
 
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+
+import Loading from './Loading';
 
 const useStyles = makeStyles({
   card: {
-    width: "45%",
+    width: '45%',
     height: 275,
-    margin: "10% 5%",
+    margin: '10% 5%',
     fontSize: 24,
-    overflow: "hidden",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    overflow: 'hidden',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
     // padding: "2%"
   },
   bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)'
   },
   title: {
     fontSize: 28
@@ -36,33 +38,33 @@ const useStyles = makeStyles({
     marginBottom: 12
   },
   layout: {
-    display: "flex",
-    flexDirection: "row nowrap"
+    display: 'flex',
+    flexDirection: 'row nowrap'
   },
   linkContainer: {
-    display: "flex",
-    flexDirection: "row nowrap",
-    justifyContent: "space-around",
-    marginTop: "10%"
+    display: 'flex',
+    flexDirection: 'row nowrap',
+    justifyContent: 'space-around',
+    marginTop: '10%'
   },
   aTags: {
-    textDecoration: "none",
+    textDecoration: 'none',
     fontSize: 12,
-    cursor: "pointer",
-    color: "white"
+    cursor: 'pointer',
+    color: 'white'
   },
   imgSizing: {
-    width: "100%",
+    width: '100%',
     padding: 0
   },
   iconBack: {
-    marginTop: "230px",
-    marginRight: "-5%"
+    marginTop: '230px',
+    marginRight: '-5%'
   },
   iconForward: {
-    marginTop: "230px",
-    marginLeft: "-4.5%",
-    marginRight: "5%"
+    marginTop: '230px',
+    marginLeft: '-4.5%',
+    marginRight: '5%'
   }
 });
 
@@ -94,7 +96,7 @@ function History() {
     //rework so doesn't perform an axios call every 10 seconds
     dispatch(fetchHistory(historyState));
     dispatch(fetchOneLaunch(65));
-    setTimeout(() => {
+    const id = setTimeout(() => {
       const prevHistoryState = historyState;
       const prevImageState = imageState;
       prevHistoryState <= 15
@@ -103,7 +105,9 @@ function History() {
       prevImageState <= 4
         ? setImageState(prevImageState + 1)
         : setImageState(0);
-    }, 10000);
+    }, 20000);
+
+    return () => clearInterval(id);
   }, [historyState, imageState]);
 
   const handleBack = () => {
@@ -126,7 +130,7 @@ function History() {
               className={classes.imgSizing}
               src={picsArr.flickr_images[imageState]}
               alt="flickr"
-              onClick={() => console.log("IMAGE CLICKED!!!")}
+              onClick={() => console.log('IMAGE CLICKED!!!')}
             />
           </div>
         )}
@@ -137,7 +141,7 @@ function History() {
           <Typography className={classes.pos} color="textSecondary">
             On
             {event_date_utc &&
-              event_date_utc.replace("T", " at ").replace("Z", "")}
+              event_date_utc.replace('T', ' at ').replace('Z', '')}
           </Typography>
           <Typography
             className={classes.title}

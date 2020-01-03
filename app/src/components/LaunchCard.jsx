@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
-import moment from "moment";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchOneLaunch } from "../store/action";
+import Carousel from 'react-material-ui-carousel';
 
-import spacexPlaceholder from "../img/spacexPlaceholder.png";
+import { fetchOneLaunch } from '../store/action';
+
+import spacexPlaceholder from '../img/spacexPlaceholder.png';
 
 const LaunchCard = ({ match }) => {
   const dispatch = useDispatch();
-  const launch = useSelector((state) => state.launchesReducer.launch);
+  const launch = useSelector(state => state.launchesReducer.launch);
 
   const {
     details,
@@ -35,35 +37,45 @@ const LaunchCard = ({ match }) => {
   return (
     <>
       {links.flickr_images.length === 0 && !links.mission_patch_small && (
-        <img src={spacexPlaceholder} alt={"Rocket Launch with SpaceX Logo"} />
+        <img src={spacexPlaceholder} alt={'Rocket Launch with SpaceX Logo'} />
       )}
 
       {links.flickr_images.length === 0 && links.mission_patch_small && (
         <img
           src={links.mission_patch_small}
-          alt={"Patch for " + mission_name}
+          alt={'Patch for ' + mission_name}
         />
       )}
 
-      {launch.links.flickr_images.length > 0 &&
-        launch.links.flickr_images.map((img, index) => (
-          <img key={index} src={img} alt={"Launch"} />
-        ))}
+      {launch.links.flickr_images.length > 0 && (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Carousel>
+            {launch.links.flickr_images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={'Launch'}
+                style={{ height: 'auto', width: '500px' }}
+              />
+            ))}
+          </Carousel>
+        </div>
+      )}
 
       <h1>{mission_name}</h1>
 
-      <h2>{moment(launch_date_utc).format("MMMM Do YYYY, h:mm:ss a")}</h2>
+      <h2>{moment(launch_date_utc).format('MMMM Do YYYY, h:mm:ss a')}</h2>
 
       <h3>SITE: {launch_site.site_name}</h3>
 
       <h3>
-        The launch was a{" "}
+        The launch was a{' '}
         {launch_success ? `success!` : `miserable, disgusting failure!`}
       </h3>
 
       {rocket && (
         <>
-          <p>Rocket Name: {rocket.rocket_name}</p>{" "}
+          <p>Rocket Name: {rocket.rocket_name}</p>{' '}
           <p>Rocket Type: {rocket.rocket_type} </p>
         </>
       )}

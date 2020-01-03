@@ -9,6 +9,7 @@ import { fetchLaunchList, fetchNextTen, fetchPrevTen } from '../store/action';
 
 import Launch from './Launch';
 import Search from './Search';
+import Loading from './Loading';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +24,10 @@ const useStyles = makeStyles(theme => ({
   },
   summary: {
     padding: '15px'
+  },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center'
   }
 }));
 
@@ -35,6 +40,10 @@ function LaunchList() {
     return state.launchesReducer.searchedLaunches;
   });
 
+  const { launchesLoading } = useSelector(state => ({
+    launchesLoading: state.launchesReducer.loading
+  }));
+
   const classes = useStyles();
 
   useEffect(() => {
@@ -46,21 +55,43 @@ function LaunchList() {
       <Search searchType="launches" />
       <h2 style={{ textAlign: 'center' }}>Launches</h2>
       {searchedLaunches && searchedLaunches.length > 0 ? (
-        <div className={classes.root}>
-          {searchedLaunches.map(launch => (
-            <Launch key={launch.flight_number} launch={launch} />
-          ))}
-        </div>
+        <>
+          {launchesLoading ? (
+            <Loading />
+          ) : (
+            <div className={classes.root}>
+              {searchedLaunches.map(launch => (
+                <Launch key={launch.flight_number} launch={launch} />
+              ))}
+            </div>
+          )}
+        </>
       ) : (
-        <LaunchContainer>
-          <div className={classes.root}>
-            {launches.map(launch => (
-              <Launch key={launch.flight_number} launch={launch} />
-            ))}
-          </div>
-          <Button onClick={() => dispatch(fetchPrevTen())}>Previous</Button>
-          <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
-        </LaunchContainer>
+        <>
+          {launchesLoading ? (
+            <Loading />
+          ) : (
+            <LaunchContainer>
+              <div className={classes.buttonContainer}>
+                <Button onClick={() => dispatch(fetchPrevTen())}>
+                  Previous
+                </Button>
+                <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
+              </div>
+              <div className={classes.root}>
+                {launches.map(launch => (
+                  <Launch key={launch.flight_number} launch={launch} />
+                ))}
+              </div>
+              <div className={classes.buttonContainer}>
+                <Button onClick={() => dispatch(fetchPrevTen())}>
+                  Previous
+                </Button>
+                <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
+              </div>
+            </LaunchContainer>
+          )}
+        </>
       )}
     </>
   );
