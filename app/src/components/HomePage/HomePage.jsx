@@ -7,6 +7,7 @@ function HomePage() {
   return (
     <div>
       <History />
+      <hr />
       <LaunchesPreview />
     </div>
   );

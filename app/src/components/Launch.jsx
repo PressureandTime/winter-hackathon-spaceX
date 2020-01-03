@@ -1,55 +1,55 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import { withRouter } from "react-router-dom";
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   card: {
-    width: '100%',
+    width: "100%",
     maxWidth: 300,
-    margin: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'space-between'
+    margin: "10px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "space-between"
   },
   actionArea: {
-    paddingTop: '20px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    paddingTop: "20px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   media: {
     height: 250,
     width: 250
   },
   bottomRow: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'flex-end'
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "flex-end"
   },
   details: {
-    overflow: 'auto',
+    overflow: "auto",
     height: 80
   },
   status: {
-    display: 'flex',
-    flexDirection: 'row',
-    textAlign: 'center',
-    justifyContent: 'center'
+    display: "flex",
+    flexDirection: "row",
+    textAlign: "center",
+    justifyContent: "center"
   }
 });
 
@@ -67,12 +67,14 @@ function Launch({ launch, history }) {
 
   return (
     <>
-      <Card className={classes.card}>
+      <Card
+        className={classes.card}
+        onClick={() => history.push(`/launch/${flight_number}`)}
+      >
         <CardActionArea className={classes.actionArea}>
           <CardMedia
             className={classes.media}
             image={links.mission_patch_small}
-            title="Contemplative Reptile"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
@@ -80,7 +82,7 @@ function Launch({ launch, history }) {
             </Typography>
             <div className={classes.status}>
               <Typography component="p">Status:</Typography>
-              <StatusImg fill={launch_success ? 'green' : 'red'}></StatusImg>
+              <StatusImg fill={launch_success ? "green" : "red"}></StatusImg>
             </div>
             <div className={classes.details}>
               <Typography variant="body2" color="textSecondary" component="p">
