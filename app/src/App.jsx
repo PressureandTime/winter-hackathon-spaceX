@@ -33,8 +33,9 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
 			<Switch>
-				<Route path="/launches" component={LaunchList} />
 				<Route path="/rockets" component={RocketList} />
+
+				<Route path="/launches" component={LaunchList} />
 				<Route exact path="/" component={HomePage} />
 			</Switch>
 		</ThemeProvider>

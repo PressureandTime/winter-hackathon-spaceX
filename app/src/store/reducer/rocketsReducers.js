@@ -17,7 +17,7 @@ const rocketsReducer = (state = initialState, action) => {
 		case FETCH_ROCKETS_SUCCESS:
 			return {
 				...state,
-				launches: action.payload
+				rockets: action.payload
 			};
 		case FETCH_ROCKETS_FAILURE:
 			return {

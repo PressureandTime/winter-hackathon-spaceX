@@ -3,26 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchRocketsList } from "../../store/action/index";
 
-import Rocket from "../Launch";
+import Rocket from "./Rocket";
 
 function RocketList() {
 	const dispatch = useDispatch();
 	const rockets = useSelector(state => {
 		return state.rocketsReducer.rockets;
 	});
-	console.log(`Rocket List: rockets: `, rockets);
 	useEffect(() => {
 		dispatch(fetchRocketsList());
 	}, []);
 	return (
 		<div style={{ marginTop: "50px" }}>
 			{rockets.map(rocket => (
-				<Rocket key={rocket} />
+				<Rocket key={rocket.rocket_id} rocket={rocket} />
 			))}
-			{/* <button onClick={() => dispatch(fetchPrevTenRockets())}>
-				Previous 10
-			</button>
-			<button onClick={() => dispatch(fetchNextTenRockets())}>Next 10</button> */}
 		</div>
 	);
 }
