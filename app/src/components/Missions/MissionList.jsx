@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+
 import Button from "@material-ui/core/Button";
 
 import {
@@ -9,10 +10,12 @@ import {
 	fetchNextTenMissions
 } from "../../store/action/index";
 
+
 import Mission from "./Mission";
 import Search from "../Search";
 
 const useStyles = makeStyles(theme => ({
+
 	root: {
 		width: "100%"
 	},
@@ -20,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 		display: "flex",
 		justifyContent: "center"
 	}
+
 }));
 function MissionList() {
 	const dispatch = useDispatch();
@@ -55,6 +59,7 @@ function MissionList() {
 			</div>
 		</>
 	);
+
 }
 
 export default MissionList;

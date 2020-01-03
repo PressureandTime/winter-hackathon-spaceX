@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
 
-import { fetchRocketsList } from '../../store/action/index';
+import { fetchRocketsList } from "../../store/action/index";
 
-import Rocket from './Rocket';
-import Search from '../Search';
+import Rocket from "./Rocket";
+import Search from "../Search";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%'
+    width: "100%"
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -33,7 +33,7 @@ function RocketList() {
   return (
     <>
       <Search searchType="rockets" />
-      <div style={{ marginTop: '50px' }} className={classes.root}>
+      <div style={{ marginTop: "50px" }} className={classes.root}>
         {searchedRockets && searchedRockets.length > 0
           ? searchedRockets.map(rocket => (
               <Rocket key={rocket.rocket_id} rocket={rocket} />

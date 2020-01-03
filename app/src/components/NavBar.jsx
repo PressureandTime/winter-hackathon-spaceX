@@ -18,6 +18,7 @@ const NavBar = ({ darkMode, setDarkMode }) => {
 
 	const NavLink = React.forwardRef((props, ref) => <RouterLink innerRef={ref} {...props} />);
 
+
 	return (
 		<CssBaseline>
 			<AppBar position="static">
@@ -37,6 +38,7 @@ const NavBar = ({ darkMode, setDarkMode }) => {
 							className={classes.link}>
 							Launches
 						</Link>
+
 
 						<Link
 							variant="button"

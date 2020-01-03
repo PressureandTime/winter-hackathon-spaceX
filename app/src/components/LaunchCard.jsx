@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
-// import moment from 'moment';
+
+import moment from "moment";
+
 import { useDispatch, useSelector } from "react-redux";
 
 import Carousel from "react-material-ui-carousel";
@@ -9,6 +11,7 @@ import { fetchOneLaunch } from "../store/action";
 import spacexPlaceholder from "../img/spacexPlaceholder.png";
 
 const LaunchCard = ({ match }) => {
+
 	const dispatch = useDispatch();
 	const launch = useSelector(state => state.launchesReducer.launch);
 
@@ -90,6 +93,7 @@ const LaunchCard = ({ match }) => {
 			)}
 		</>
 	);
+
 };
 
 export default LaunchCard;

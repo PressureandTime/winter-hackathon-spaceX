@@ -8,11 +8,11 @@ import {
   FETCH_SEARCH_START_L,
   FETCH_SEARCH_SUCCESS_L,
   FETCH_SEARCH_FAILURE_L
-} from '../action';
+} from "../action";
 
 const initialState = {
   launches: [],
-  error: '',
+  error: "",
   launch: {},
   loading: false
 };

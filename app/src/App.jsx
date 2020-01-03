@@ -7,7 +7,7 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { blueGrey, grey, blue } from "@material-ui/core/colors";
 
 import NavBar from "./components/NavBar";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/HomePage/HomePage";
 import LaunchList from "./components/LaunchList";
 import RocketList from "./components/Rockets/RocketList";
 import MissionList from "./components/Missions/MissionList";
@@ -20,13 +20,13 @@ const App = () => {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: darkMode ? grey[900] : grey[100]
+        main: darkMode ? grey[900] : blueGrey[900]
       },
       secondary: {
         main: darkMode ? blue.A100 : blue.A400
       },
       background: {
-        default: darkMode ? "#121212" : grey[200]
+        default: darkMode ? "#121212" : grey[50]
       },
       type: darkMode ? "dark" : "light"
     }

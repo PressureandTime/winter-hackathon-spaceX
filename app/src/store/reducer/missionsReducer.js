@@ -1,10 +1,7 @@
 import {
 	FETCH_MISSIONS_SUCCESS,
 	FETCH_MISSIONS_START,
-	FETCH_MISSIONS_FAILURE,
-	FETCH_SEARCH_FAILURE_M,
-	FETCH_SEARCH_START_M,
-	FETCH_SEARCH_SUCCESS_M
+	FETCH_MISSIONS_FAILURE
 } from "../action";
 
 const initialState = {
@@ -26,12 +23,6 @@ const missionsReducer = (state = initialState, action) => {
 			return {
 				error: action.payload
 			};
-		case FETCH_SEARCH_START_M:
-			return { ...state, loading: true };
-		case FETCH_SEARCH_SUCCESS_M:
-			return { ...state, loading: false, searchedMissions: action.payload };
-		case FETCH_SEARCH_FAILURE_M:
-			return { ...state, loading: false, error: action.payload };
 		default:
 			return state;
 	}

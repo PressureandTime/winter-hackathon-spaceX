@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "@material-ui/core/Button";
 import styled from "styled-components";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { fetchLaunchList, fetchNextTen, fetchPrevTen } from "../store/action";
+import { fetchLaunchList } from "../../store/action";
 
-import Launch from "./Launch";
-import Search from "./Search";
-import Loading from "./Loading";
+import Launch from "../Launch";
+import Search from "../Search";
+import Loading from "../Loading";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +27,9 @@ const useStyles = makeStyles(theme => ({
   buttonContainer: {
     display: "flex",
     justifyContent: "center"
+  },
+  searchBar: {
+    paddingLeft: "20%"
   }
 }));
 
@@ -54,7 +56,7 @@ function LaunchList() {
   return (
     <>
       <Search searchType="launches" />
-      <h2 style={{ textAlign: "center" }}>Launches</h2>
+      <h2 style={{ textAlign: "center" }}>Past Launches</h2>
       {searchedLaunches && searchedLaunches.length > 0 ? (
         <>
           {launchesLoading ? (
@@ -73,22 +75,13 @@ function LaunchList() {
             <Loading />
           ) : (
             <LaunchContainer>
-              <div className={classes.buttonContainer}>
-                <Button onClick={() => dispatch(fetchPrevTen())}>
-                  Previous
-                </Button>
-                <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
-              </div>
               <div className={classes.root}>
-                {launches.map(launch => (
-                  <Launch key={launch.flight_number} launch={launch} />
-                ))}
-              </div>
-              <div className={classes.buttonContainer}>
-                <Button onClick={() => dispatch(fetchPrevTen())}>
-                  Previous
-                </Button>
-                <Button onClick={() => dispatch(fetchNextTen())}>Next</Button>
+                {launches.map(
+                  (launch, index) =>
+                    index <= 3 && (
+                      <Launch key={launch.flight_number} launch={launch} />
+                    )
+                )}
               </div>
             </LaunchContainer>
           )}

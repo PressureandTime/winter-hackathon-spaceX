@@ -2,11 +2,11 @@ import {
   FETCH_HISTORY_SUCCESS,
   FETCH_HISTORY_START,
   FETCH_HISTORY_FAILURE
-} from '../action';
+} from "../action";
 
 const initialState = {
-  history: {},
-  error: '',
+  history: [],
+  error: "",
   loading: false
 };
 
